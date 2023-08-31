@@ -4,8 +4,16 @@ import "./ScorePage.css";
 import { useNavigate } from "react-router-dom";
 
 const ScorePage = () => {
-  const { marks, quizData, setQuizData, setImgCategory, setTimer, setMarks } =
-    useDataContext();
+  const {
+    marks,
+    quizData,
+    setQuizData,
+    setImgCategory,
+    setTimer,
+    setMarks,
+    setDisable,
+    setNextQuestion,
+  } = useDataContext();
   const navigate = useNavigate();
   const shuffleData = (dataArr) => {
     for (let i = dataArr.length - 1; i > 0; i--) {
@@ -16,6 +24,8 @@ const ScorePage = () => {
     setTimer({ s: 15 });
     setImgCategory("");
     setMarks(0);
+    setDisable(false);
+    setNextQuestion(0);
   };
 
   return (
