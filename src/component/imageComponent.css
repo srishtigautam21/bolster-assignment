@@ -12,3 +12,14 @@
   align-items: center;
   gap: 20px;
 }
+.image1 {
+  text-align: center;
+}
+.imgLabel {
+  text-align: center;
+}
+.imgStyle {
+  margin-top: 20px;
+  font-size: large;
+  font-weight: 600;
+}

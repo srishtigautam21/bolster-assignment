@@ -27,13 +27,13 @@ const data = [
   },
   {
     id: 4,
-    image1: correct4,
-    image2: fake4,
+    image1: fake4,
+    image2: correct4,
   },
   {
     id: 5,
-    image1: correct5,
-    image2: fake5,
+    image1: fake5,
+    image2: correct5,
   },
   {
     id: 6,
@@ -47,8 +47,8 @@ const data = [
   },
   {
     id: 8,
-    image1: correct8,
-    image2: fake8,
+    image1: fake8,
+    image2: correct8,
   },
   {
     id: 9,
@@ -57,8 +57,8 @@ const data = [
   },
   {
     id: 10,
-    image1: correct10,
-    image2: fake10,
+    image1: fake10,
+    image2: correct10,
   },
 ];
 export { data };

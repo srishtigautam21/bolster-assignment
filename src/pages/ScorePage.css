@@ -1,7 +1,7 @@
 .scoreCard {
   box-shadow: 5px 5px 5px 5px lightgray;
-  width: 40vw;
-  height: 30vh;
+  width: 70vw;
+  height: 50vh;
   padding: 20px;
   position: absolute;
   top: 50%;
@@ -11,4 +11,26 @@
   flex-direction: column;
   gap: 20px;
   align-items: center;
+  justify-content: center;
+}
+.score {
+  font-size: 30px;
+  font-weight: 700;
+}
+.yourScore {
+  font-size: 20px;
+  font-weight: 600;
+}
+.retryBtn {
+  width: 100px;
+  height: 30px;
+  background-color: green;
+  border-radius: 10px;
+  border: none;
+  font-size: large;
+  color: white;
+  cursor: pointer;
+}
+.retryBtn:hover {
+  background-color: rgb(2, 57, 2);
 }

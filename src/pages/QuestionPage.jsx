@@ -1,41 +1,19 @@
 import React from "react";
 import ImageComponent from "../component/ImageComponent";
 import { useDataContext } from "../context/dataContext";
-// import { data } from "../data";
-import { useNavigate } from "react-router-dom";
 
 const QuestionPage = () => {
   const {
     timer,
     marks,
     isCorrect,
-    // imageSelected,
-    // setImageSelected,
-    nextQues,
-    setNextQuestion,
     isFakeOrNot,
     stopTimer,
-    startTimer,
-    setTimer,
-    setImgCategory,
-    myClearInterval,
-    setIsCorrect,
     quizData,
+    disable,
+    message,
+    handleQuestion,
   } = useDataContext();
-  const navigate = useNavigate();
-  const handleQuestion = () => {
-    if (nextQues === 9) {
-      navigate("/score");
-      setIsCorrect("");
-    } else {
-      setNextQuestion((ques) => ques + 1);
-      clearInterval(myClearInterval);
-      setTimer({ s: 15 });
-      startTimer();
-      setImgCategory("");
-      setIsCorrect("");
-    }
-  };
 
   return (
     <>
@@ -45,30 +23,50 @@ const QuestionPage = () => {
           <div className='marks'>Marks: {marks}</div>
         </div>
 
-        {isCorrect !== ""
-          ? isCorrect
-            ? "Yay!!! you got that right"
-            : "Oops!! thats wrong"
-          : ""}
+        <div className='msgWrapper'>
+          {isCorrect !== "" ? (
+            isCorrect ? (
+              <div style={{ color: "green" }}>
+                Yay!!! you got that right👏👏
+              </div>
+            ) : (
+              <div style={{ color: "red" }}>Oops!! thats wrong 😥😥</div>
+            )
+          ) : message ? (
+            "You need to select an option!👀"
+          ) : (
+            ""
+          )}
+        </div>
         <ImageComponent data={quizData} />
-        {/* imageSelected={imageSelected}
-          nextQues={nextQues}
-          setNextQuestion={setNextQuestion}
-          setImageSelected={setImageSelected} */}
-
-        <button
-          onClick={(e) => {
-            isFakeOrNot(e);
-            stopTimer();
-          }}
-        >
-          {" "}
-          Let's Check
-        </button>
+        {!disable ? (
+          <button
+            onClick={(e) => {
+              isFakeOrNot(e);
+              stopTimer();
+            }}
+            className='checkBtn'
+          >
+            {" "}
+            Let's Check
+          </button>
+        ) : (
+          <button disable className='checkBtn disabledBtn'>
+            Let's Check
+          </button>
+        )}
       </div>
 
       <div className='footer'>
-        <button onClick={() => handleQuestion()}>Next Question</button>
+        {disable ? (
+          <button onClick={() => handleQuestion()} className='checkBtn'>
+            Next Question
+          </button>
+        ) : (
+          <button disable className='checkBtn disabledBtn'>
+            Next Question
+          </button>
+        )}
       </div>
     </>
   );

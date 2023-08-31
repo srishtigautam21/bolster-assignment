@@ -1,10 +1,12 @@
+.home {
+  height: 100%;
+}
 .homePageWrapper {
   display: flex;
   gap: 20px;
   margin: 20px;
   align-items: center;
   justify-content: center;
-  max-height: 100vh;
 }
 .header {
   width: 50%;
@@ -30,6 +32,10 @@
   width: 70px;
   height: 30px;
   border-radius: 10px;
+  cursor: pointer;
+}
+.startBtn:hover {
+  background-color: rgb(2, 57, 2);
 }
 .intro {
   font-size: 20px;

@@ -1,8 +1,10 @@
 import { useContext, createContext, useState } from "react";
 import { data } from "../data";
+import { useNavigate } from "react-router-dom";
 const DataContext = createContext({});
 
 const DataProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [imageSelected, setImageSelected] = useState("");
   const [quizData, setQuizData] = useState(data);
   const [imgCategory, setImgCategory] = useState("");
@@ -10,9 +12,10 @@ const DataProvider = ({ children }) => {
   const [marks, setMarks] = useState(0);
   const [timer, setTimer] = useState({ s: 15 });
   const [myClearInterval, setMyClearInterval] = useState();
-  // const [pageNumber, setPageNumber] = useState(0);
+  const [disable, setDisable] = useState();
   const [nextQues, setNextQuestion] = useState(0);
-  console.log("here", imageSelected);
+  const [message, setMessage] = useState(false);
+
   const run = () => {
     if (timer.s === 0) {
       setNextQuestion((ques) => ques + 1);
@@ -22,8 +25,6 @@ const DataProvider = ({ children }) => {
     return setTimer({ s: timer.s });
   };
   const startTimer = () => {
-    // setTimer({ s: 15 });
-    console.log("timer on next ques", timer.s);
     run();
     setMyClearInterval(
       setInterval(() => {
@@ -34,31 +35,42 @@ const DataProvider = ({ children }) => {
 
   const stopTimer = () => {
     clearInterval(myClearInterval);
+    setTimer({ s: 15 });
   };
-  // const handleStopWatch = () => {
-  //   if (timer.s === 0) {
-  //     clearInterval(myClearInterval);
-  //   } else {
-  //     timer.s--;
-  //   }
-  //   setTimer({ s: timer.s });
-  // };
 
-  // useEffect(() => {
-  //   setMyClearInterval(
-  //     setInterval(() => {
-  //       handleStopWatch();
-  //     }, 1500)
-  //   );
-  //   // eslint-disable-next-line
-  // }, []);
+  const handleQuestion = () => {
+    if (nextQues === 9) {
+      navigate("/score");
+      setIsCorrect("");
+    } else {
+      setNextQuestion((ques) => ques + 1);
+
+      startTimer();
+      setImgCategory("");
+      setIsCorrect("");
+      setMessage(false);
+      setDisable(false);
+      setImageSelected("");
+    }
+  };
+
   const isFakeOrNot = (e) => {
     e.stopPropagation();
-    if (imageSelected === "correct") {
+
+    if (
+      imageSelected === "" ||
+      imgCategory === "image1" ||
+      imgCategory === "image2"
+    ) {
+      setMessage(true);
+      setIsCorrect("");
+    } else if (imageSelected === "correct") {
       setMarks((c) => c + 1);
       setIsCorrect(true);
+      setDisable(true);
     } else {
       setIsCorrect(false);
+      setDisable(true);
     }
   };
 
@@ -84,6 +96,11 @@ const DataProvider = ({ children }) => {
         setMyClearInterval,
         quizData,
         setQuizData,
+        disable,
+        setDisable,
+        message,
+        setMessage,
+        handleQuestion,
       }}
     >
       {children}
