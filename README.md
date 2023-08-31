@@ -13,7 +13,7 @@ and the player will be shown the total score at the end of the game.
 files will consist of the correct website image and a fake website
 image.
 
-## Live-link : [Nutrismart-TV](https://nutrismart-tv.netlify.app)
+## Live-link : [Spot-the-fake](https://spot-the-fake.netlify.app/)
 
 ## Tech-Stack
 
